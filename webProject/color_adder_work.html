@@ -1,0 +1,35 @@
+	<html>
+
+	<head>
+		<title> Web Project - Guy Giladi </title>
+		<link rel="stylesheet" type="text/css" href="style.css">
+
+	</head>
+
+	<body>
+
+	<div id="container">
+		<div id="user_input_container" class="user_input">
+			<input type="text" id="input_text_box"></input>
+			<input type="button" class="button" value="add" onclick="addItem()">
+		</div>
+
+		<div id="images_container" class="images">
+
+		</div>
+
+		</div>
+
+
+		<script>
+			function addItem() {
+				var newItem = document.getElementById('input_text_box');
+				var divElement= document.getElementById('images_container');
+				var newDiv = document.createElement("div");
+				newDiv.style.backgroundColor= newItem.value;
+				newDiv.innerHTML=newItem.value;
+				divElement.appendChild(newDiv);
+			}
+		</script>
+	</body>
+	</html>

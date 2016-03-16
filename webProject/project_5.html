@@ -1,0 +1,152 @@
+<html>
+
+<head>
+	<title> Web Project - Guy Giladi </title>
+	<link rel="stylesheet" type="text/css" href="style2.css">
+
+</head>
+
+<body>
+
+	<div id="container">
+		<div id="user_input_container" class="user_input">
+			<input type="text" id="input_text_url" class="txtBox" placeholder="please enter URL here"></input>
+			<input type="text" id="input_text_name" class="txtBox" placeholder="please enter image's name here"></input>
+			<input type="button" class="button" value="add" onclick="addItem()">
+		</div>
+
+		<div id="images_container" class="images">
+			<img id="currentImg" class="images" src="">
+			<p id="currentP"> </p>
+		</div>
+
+
+		<div id="buttons">
+			<input type="button" id="backBtn" class="button" value="back" onclick="backBtn()">
+			<input type="button" id="nextBtn" class="button" value="next" onclick="nextBtn()">
+		</div>
+
+		<div id="quickButtonsContainer">
+			<ul class="quickButtons" id="ulQuickImg">
+
+			</ul>
+		</div>
+
+	</div>
+
+	<script>
+
+	var picCount=0;
+	var imgArray = new Array();
+	var pArray= new Array();
+	var currentPicIndex=0;
+
+
+	function addItem() {
+
+		var inputUrl = document.getElementById('input_text_url');
+		var inputName= document.getElementById('input_text_name');
+		var divQuickButtons= document.getElementById('quickButtons');
+		var imgElement= document.getElementById('currentImg');
+		var pElement= document.getElementById('currentP');
+		var newImg = document.createElement('img');
+		var newPar= document.createElement('p');
+
+		//if not enter any url
+		if(inputUrl.value=="")
+		return;
+
+		newImg.src=inputUrl.value;
+		newImg.class="images";
+		newPar.innerHTML=inputName.value;
+
+		imgArray[picCount]=newImg;
+		pArray[picCount]=newPar;
+		picCount=picCount+1;
+
+		if(picCount!=1)
+		currentPicIndex=currentPicIndex+1;
+
+		imgElement.src=newImg.src;
+		pElement.innerHTML=	newPar.innerHTML;
+
+   addQuickBtn(picCount);
+
+
+	}
+
+	function nextBtn() {
+
+		var imgElement= document.getElementById('currentImg');
+		var pElement= document.getElementById('currentP');
+
+		if(currentPicIndex==picCount-1)
+		{
+			currentPicIndex=0;
+			imgElement.src=imgArray[currentPicIndex].src;
+			pElement.innerHTML=pArray[currentPicIndex].innerHTML;
+		}
+
+		else {
+			currentPicIndex=currentPicIndex+1;
+			imgElement.src=imgArray[currentPicIndex].src;
+			pElement.innerHTML=pArray[currentPicIndex].innerHTML;
+
+		}
+
+	}
+
+	function backBtn() {
+
+		var imgElement= document.getElementById('currentImg');
+		var pElement= document.getElementById('currentP');
+
+		if(currentPicIndex==0)
+		{
+			currentPicIndex=picCount-1;
+			imgElement.src=imgArray[currentPicIndex].src;
+			pElement.innerHTML=pArray[currentPicIndex].innerHTML;
+		}
+
+		else {
+			currentPicIndex=currentPicIndex-1;
+			imgElement.src=imgArray[currentPicIndex].src;
+			pElement.innerHTML=pArray[currentPicIndex].innerHTML;
+
+		}
+
+	}
+
+	function addQuickBtn(picCount)
+	{
+		var ulQuickButtons= document.getElementById('ulQuickImg');
+		var newLi= document.createElement('li');
+		var newButton= document.createElement('input');
+
+		newButton.onclick= function () {
+			changeCurrentImg(picCount);
+		};
+
+		newButton.type="button"
+		newButton.class="quickButtons"
+		newButton.value=picCount;
+		newLi.appendChild(newButton);
+		newLi.class ="quickButtons"
+		newLi.style.display="inline-block";
+		ulQuickButtons.appendChild(newLi);
+
+	}
+
+	function changeCurrentImg(imgNumber)
+	{
+		var imgElement= document.getElementById('currentImg');
+		var pElement= document.getElementById('currentP');
+
+		currentPicIndex=imgNumber-1;
+
+		imgElement.src=imgArray[currentPicIndex].src;
+		pElement.innerHTML=pArray[currentPicIndex].innerHTML;
+	}
+	</script>
+</body>
+</html>

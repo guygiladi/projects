@@ -1,0 +1,41 @@
+<html>
+
+<head>
+	<title> Web Project - Guy Giladi </title>
+	<link rel="stylesheet" type="text/css" href="style2.css">
+
+</head>
+
+<body>
+
+	<div id="container">
+		<div id="user_input_container" class="user_input">
+			<input type="text" id="input_text_url" class="txtBox" placeholder="please enter URL here"></input>
+			<input type="text" id="input_text_name" class="txtBox" placeholder="please enter image's name here"></input>
+			<input type="button" class="button" value="add" onclick="addItem()">
+		</div>
+
+		<div id="images_container" class="images">
+
+		</div>
+
+	</div>
+
+
+	<script>
+	function addItem() {
+
+		var newItem = document.getElementById('input_text_url');
+		var divElement= document.getElementById('images_container');
+		var picName= document.getElementById('input_text_name')
+		var newImg = document.createElement('img');
+		var newPar= document.createElement('p');
+
+		newImg.src=newItem.value;
+		newPar.innerHTML=picName.value;
+		divElement.appendChild(newImg);
+		divElement.appendChild(newPar);
+	}
+	</script>
+</body>
+</html>
